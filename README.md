@@ -16,7 +16,7 @@ Voting Error Handling: I implemented a custom error page and redirected voting-r
 
 I didn't do much research on this project, I only followed documentation especially for OAuth and some of Manny's note.
 
-I honestly wish I had achieved more, but I’m glad I kept pushing through. I would really appreciate some one-on-one counselling or a check-in to discuss my progress on the course and get professional advice on areas I should focus on or improve. I've got quite some work to do on myself and I am gonna keep grinding.
+I honestly wish I had achieved more. I would really appreciate some one-on-one counselling or a check-in to discuss my progress on the course and get professional advice on areas I should focus on or improve. I've got quite some work to do on myself and I am gonna keep pushing.
 
 
 
