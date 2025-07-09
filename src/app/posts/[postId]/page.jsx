@@ -3,12 +3,29 @@ import { CommentList } from "@/components/CommentList";
 import { Vote } from "@/components/Vote";
 import { db } from "@/db";
 
+export async function generateMetadata({ params }) {
+  const postId = params.postId;
+  console.log(postId);
+
+  const { rows } = await db.query(
+    `SELECT title FROM posts WHERE id = $1 LIMIT 1`,
+    [postId]
+  );
+  const post = rows[0];
+
+  console.log(post);
+
+  return {
+    title: post?.title || "Post Not Found",
+  };
+}
+
 export default async function SinglePostPage({ params }) {
   const postId = params.postId;
 
   const { rows: posts } = await db.query(
-    `SELECT posts.id, posts.title, posts.body, posts.created_at, users.name, 
-    COALESCE(SUM(votes.vote), 0) AS vote_total
+    `SELECT posts.id, posts.title, posts.body, posts.created_at, users.name,
+     COALESCE(SUM(votes.vote), 0) AS vote_total
     FROM posts
     JOIN users ON posts.user_id = users.id
     LEFT JOIN votes ON votes.post_id = posts.id
@@ -20,7 +37,7 @@ export default async function SinglePostPage({ params }) {
   const post = posts[0];
 
   const { rows: votes } = await db.query(
-    `SELECT *, users.name from votes
+    `SELECT *, users.name from votes 
      JOIN users on votes.user_id = users.id`
   );
 

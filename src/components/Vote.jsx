@@ -2,6 +2,9 @@ import { db } from "@/db";
 import auth from "../app/middleware";
 import { revalidatePath } from "next/cache";
 import { VoteButtons } from "./VoteButtons";
+import {redirect} from "next/navigation";
+
+
 
 async function getExistingVote(userId, postId) {
   const { rows: existingVotes } = await db.query(
@@ -13,35 +16,26 @@ async function getExistingVote(userId, postId) {
 }
 
 async function handleVote(userId, postId, newVote) {
-  // Check if the user has already voted on this post
   if (!userId) {
-    throw new Error("Cannot vote without being logged in");
+
+    redirect(`/error?message=You must be logged in to vote`);
   }
 
   const existingVote = await getExistingVote(userId, postId);
 
   if (existingVote) {
-    if (existingVote.vote === newVote) {
-      // User is toggling their vote, so remove it
-      await db.query("DELETE FROM votes WHERE id = $1", [existingVote.id]);
-    } else {
-      // Update the existing vote
-      await db.query("UPDATE votes SET vote = $1 WHERE id = $2", [
-        newVote,
-        existingVote.id,
-      ]);
-    }
-  } else {
-    // Insert a new vote
-    await db.query(
-      "INSERT INTO votes (user_id, post_id, vote, vote_type) VALUES ($1, $2, $3, 'post')",
-      [userId, postId, newVote]
-    );
+    redirect(`/error?message=You have already voted on this post`);
   }
 
-  // revalidatePath("/");
+  await db.query(
+    "INSERT INTO votes (user_id, post_id, vote, vote_type) VALUES ($1, $2, $3, 'post')",
+    [userId, postId, newVote]
+  );
+
   revalidatePath(`/post/${postId}`);
 }
+
+
 
 export async function Vote({ postId, votes }) {
   const session = await auth();

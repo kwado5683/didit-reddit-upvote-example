@@ -27,7 +27,7 @@ export async function PostList({ currentPage = 1 }) {
             <Vote postId={post.id} votes={post.vote_total} />
             <div>
               <Link
-                href={`/post/${post.id}`}
+                href={`/posts/${post.id}`}
                 className="text-3xl hover:text-pink-500"
               >
                 {post.title}
