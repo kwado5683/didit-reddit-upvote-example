@@ -1,3 +1,39 @@
+
+
+
+<!-- Reflection -->
+
+
+I did struggle with this project, but if there’s one key lesson I’ve taken away, it’s the importance of commenting and documenting each step and thought process clearly during development. This would have made it much easier to manage/understand the flow of the code for anybody working on it.
+
+I was able to complete some of the key requirements:
+
+OAuth & Deployment: Setting up GitHub OAuth and deploying on Vercel went smoothly. One new thing I learned was how to manually search for a GitHub repository if it doesn't automatically show up on Vercel — a simple detail that ended up costing me about 50 minutes until I got help from Manny.
+
+Dynamic Metadata: I attempted to use generateMetadata() to dynamically set the post title as the page title, but it didn’t work as expected. I couldn’t identify any specific errors, so this part still needs investigation.
+
+Voting Error Handling: I implemented a custom error page and redirected voting-related errors to it. This turned out to be a simple yet effective way to improve the user experience.
+
+I didn't do much research on this project, I only followed documentation especially for OAuth and some of Manny's note.
+
+I honestly wish I had achieved more, but I’m glad I kept pushing through. I would really appreciate some one-on-one counselling or a check-in to discuss my progress on the course and get professional advice on areas I should focus on or improve. I've got quite some work to do on myself and I am gonna keep grinding.
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Upvote
 
 Upvote is a Reddit-esque web application that allows users to create posts, upvote and downvote posts, and comment on posts in a multi-threaded, nested list.
